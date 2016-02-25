@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="tweetApp">
+<head>
+
+    <!-- Angular -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+    <!-- Firebase -->
+    <script src="https://cdn.firebase.com/js/client/2.2.4/firebase.js"></script>
+    <!-- AngularFire -->
+    <script src="https://cdn.firebase.com/libs/angularfire/1.1.3/angularfire.min.js"></script>
+    
+    
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body ng-controller="ChatCtrl">
+<div class="container">
+    <div class="row">
+        <div class="text-center">
+            <h1>Tweets Clase</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-offset-3 col-sm-9">
+            <ul class="chatbox">
+                <li ng-repeat="message in messages"><b>{{ message.user }}</b>: {{ message.text }}</li>
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-offset-3 col-sm-9">
+            <form ng-submit="addMessage()">
+                <input ng-model="message" type="text">
+                <input value="Enviar" type="submit">
+            </form>
+        </div>
+    </div>
+</div>
+<!-- Modules -->
+<script src="app.js"></script>
+<!-- Controllers -->
+<script src="controller.js"></script>
+<!-- Factory -->
+<script src="factory.js"></script>
+</body>
+</html>
+
+
+
