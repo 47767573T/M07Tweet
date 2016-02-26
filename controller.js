@@ -5,13 +5,15 @@
 
 app.controller("ChatCtrl", ["$scope", "chatMessages",
     // we pass our new chatMessages factory into the controller
-    function($scope, chatMessages) {
-        $scope.user = "MicroClit";
+    function($scope, chatMessages, chatUsers, $firebaseObject, $firebaseArray) {
 
-        // we add chatMessages array to the scope to be used in our ng-repeat
+        //Inicializamos lo que mostramos
+        $scope.user = "hispteric";
         $scope.messages = chatMessages;
+        // we add chatMessages array to the scope to be used in our ng-repeat
 
-        // a method to create new messages; called by ng-submit
+
+        //Metodo para crear nuevo mensajes que añade al array de mensajes; llamado ng-submit
         $scope.addMessage = function() {
             // calling $add on a synchronized array is like Array.push(),
             // except that it saves the changes to our database!
@@ -19,19 +21,13 @@ app.controller("ChatCtrl", ["$scope", "chatMessages",
                 user: $scope.user,
                 text: $scope.message
             });
-
-            // reset the message input
-            $scope.message = "";
         };
 
-        // if the messages are empty, add something for fun!
-        $scope.messages.$loaded(function() {
-            if ($scope.messages.length === 0) {
-                $scope.messages.$add({
-                    from: "Firebase Docs",
-                    content: "Hello world!"
-                });
-            }
-        });
+        //TODO: definir este elemento para devuelva array con tweets segun usuario pedido
+        $scope.buscar = function(){
+            $scope.messages = chatUsers;
+        }
+
+
     }
 ]);
