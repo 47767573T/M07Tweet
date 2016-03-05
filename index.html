@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="tweetApp">
+<html lang="en">
     <head>
 
         <!-- Bootstrap -->
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=2">
 
         <!-- Mi estilo-->
 
@@ -22,17 +22,24 @@
 
 
     </head>
-    <body ng-controller="ChatCtrl">
+    <body ng-app="tweetApp" ng-controller="TweetCtrl">
         <div class="container">
             <div class="col">
                 <div class="col-md-offset-1 col-md-6" id="left">
-                    <h1>Usuario</h1>
-                    <p>Usuario actual:</p>
-                    <p><input type="text" ng-model="user"></p>
 
-                    <p>Usuario busqueda:</p>
-                    <p><input type="text" ng-model="userId"></p>
-                    <p><input type="button" value="GO!" onClick="buscar()"></p>
+                    <h1>Usuario</h1>
+                    <p>Actual:</p>
+                    <form ng-model = "changeUser()">
+                            <input type="text" ng-model="userNew">
+                            <input value="Cambiar" type="submit">
+                    </form>
+                    </br>
+                    <p>Buscado:</p>
+                    <form ng-model = "seekUser()">
+                        <input type="text" ng-model="userToSeek">
+                        <input value="Buscar" type="submit">
+                    </form>
+
                 </div>
 
                     <div class="text-left">
@@ -40,16 +47,16 @@
                 </div>
             </div>
             <div class="col">
-                <div class="col-md-offset-4 col-sm-6">
+                <div class="col-md-offset-4 col-md-6" id ="right">
                     <ul class="chatbox">
-                        <li ng-repeat="message in messages"><b>{{ message.user }}</b>: {{ message.text }}</li>
+                        <li ng-repeat="tweet in tweets"><b>{{ tweet.user }}</b>-> {{ tweet.text }}</li>
                     </ul>
                 </div>
             </div>
             <div class="col">
                 <div class="col-md-offset-3 col-sm-9">
-                    <form ng-submit="addMessage()">
-                        <input ng-model="message" type="text">
+                    <form ng-submit="addTweet()">
+                        <input ng-model="tweet" type="text">
                         <input value="Enviar" type="submit">
                     </form>
                 </div>
