@@ -24,42 +24,38 @@
     </head>
     <body ng-app="tweetApp" ng-controller="TweetCtrl">
         <div class="container">
-            <div class="col">
+            <div class="row">
+
                 <div class="col-md-offset-1 col-md-6" id="left">
+                    <h1>TUIT</h1>
+                    <p>
+                        <form ng-model = "setUser()">
+                            <input type="text" ng-model="usuario">
+                            <input type="submit" value="Login">
+                        </form>
+                    </p>
 
-                    <h1>Usuario</h1>
-                    <p>Actual:</p>
-                    <form ng-model = "changeUser()">
-                            <input type="text" ng-model="userNew">
-                            <input value="Cambiar" type="submit">
-                    </form>
-                    </br>
-                    <p>Buscado:</p>
-                    <form ng-model = "seekUser()">
-                        <input type="text" ng-model="userToSeek">
-                        <input value="Buscar" type="submit">
-                    </form>
+                    <p>_user: {{ userId }}</p>
+                    <p>_name: {{ usuarioNombre.$value }}</p>
+                    <p>_description: {{ userDesc.$value }}</p>
+                    <p><input type="text" ng-model="usuari2Follow"><input type="button" value="_follow" ng-click="follow()"></p>
 
-                </div>
+                    <p><input type="text" ng-model="tweetTxt"><input type="button" value="_tweet" ng-click="tweet()"></p>
 
-                    <div class="text-left">
-                    <h1>Tweets</h1>
-                </div>
-            </div>
-            <div class="col">
-                <div class="col-md-offset-4 col-md-6" id ="right">
+                    <p>_following: </p>
                     <ul class="chatbox">
-                        <li ng-repeat="tweet in tweets"><b>{{ tweet.user }}</b>-> {{ tweet.text }}</li>
+                        <li ng-repeat="follow in followings">{{ follow.idUser }}</li>
                     </ul>
                 </div>
-            </div>
-            <div class="col">
-                <div class="col-md-offset-3 col-sm-9">
-                    <form ng-submit="addTweet()">
-                        <input ng-model="tweet" type="text">
-                        <input value="Enviar" type="submit">
-                    </form>
+
+                <div class="col-md-offset-1 col-md-6" id="right">
+                    <h3>_feed:</h3>
+
+                    <ul class="chatbox">
+                        <li ng-repeat="tweet in userTweets">{{ userId }}: {{ tweet.text }}</li>
+                    </ul>
                 </div>
+
             </div>
         </div>
         <!-- Modules -->
