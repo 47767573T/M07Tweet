@@ -13,8 +13,8 @@ app.factory("getUsuario", ["$firebaseObject"
             var usuarioRef = new Firebase("https://ecaibtweet.firebaseio.com/users");
 
             //Tras la peticion devolvemos objeto usuario de firebase y devolvemos nombre y descripcion
-            return {nom: $firebaseObject(usuarioRef.child(usuario).child("name"))
-                ,desc: $firebaseObject(usuarioRef.child(usuari).child("description"))};
+            return {nombre: $firebaseObject(usuarioRef.child(usuario).child("name"))
+                ,descripcion: $firebaseObject(usuarioRef.child(usuari).child("description"))};
 
         };
     }
@@ -39,7 +39,7 @@ app.factory("getTweets", ["$firebaseArray"
 /**
  * factory para peticion de tweets de usuario
  */
-app.factory("getUsuariosSeguidos", ["$firebaseArray", "$firebaseObject"
+app.factory("getSeguidos", ["$firebaseArray", "$firebaseObject"
     ,function($firebaseArray) {
         return function(usuario) {
 

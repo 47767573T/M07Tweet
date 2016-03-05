@@ -3,12 +3,39 @@
  */
 
 
-app.controller("TweetCtrl", ["$scope", "getUser", 
-    ,function($scope, ) {
+app.controller("TweetCtrl", ["$scope", getUsuario, getTweets, getSeguidos
+    ,function($scope, getUsuario, getTweets, getSeguidos) {
 
         //Inicializamos lo que mostramos
-        $scope.user = "hispteric";
-        $scope.tweets = chatTweets();
+        //$scope.user = "hispteric";
+        $scope.usuarioTweets = getTweets("clitFollower");
+
+        //Definimos el usuario
+        $scope.setUsuario = function(){
+            $scope.userId = $scope.usuario;
+            $scope.usuario = "";
+
+            //creamos variable del objeto del usuario segun funcion del factory
+            var usuarioDatos = getUsuario($scope.userId);
+            $scope.usuarioNombre = usuarioDatos.nombre;
+            $scope.usuarioDescripcion = usuarioDatos.descripcion;
+            $scope.usuarioTweets = getTweets($scope.userId);
+            $scope.seguidos = getSeguidos($scope.userId);
+            //$scope.followingTweets = getFollowingTweets($scope.userId);
+        }
+
+        //Metodo para crear nuevo mensajes que añade al array de tweets del usuario
+        $scope.addTweet = function() {
+            $scope.usuarioTweets.$add({ text: $scope.tweetTxt });
+            $scope.tweetTxt = "";
+        }
+
+        //Añade un seguido al listado de seguidos del firebase
+        $scope.follow = function() {
+            $scope.seguidos.$add({ idUser: $scope.usuari2Follow });
+            $scope.usuarioSeguido = "";
+        }
+
 
 
         $scope.changeUser = function() {
@@ -17,19 +44,6 @@ app.controller("TweetCtrl", ["$scope", "getUser",
 
 
         //Metodo para crear nuevo mensajes que añade al array de mensajes; llamado ng-submit
-        $scope.addTweet = function() {
-
-            $scope.tweets.$add({
-                user: $scope.user,
-                text: $scope.message
-            });
-        };
-
-        //TODO: definir este elemento para devuelva array con tweets segun usuario pedido
-        $scope.seekUser() = function(){
-
-        }
-
 
     }
 ]);
