@@ -31,12 +31,11 @@
                     <p>
                         <input type="text" ng-model="usuario">
                         <input type="submit" value="Login" ng-click="setUsuario()">
-
                     </p>
 
-                    <p>_user: {{ userId }}</p>
+                    <p>Usuario: {{ userId }}</p>
                     <p>_name: {{ usuarioNombre.$value }}</p>
-                    <p>_description: {{ userDesc.$value }}</p>
+                    <p>_description: {{ usuarioDescripcion.$value }}</p>
                     <p><input type="text" ng-model="usuari2Follow"><input type="button" value="_follow" ng-click="follow()"></p>
 
                     <p><input type="text" ng-model="tweetTxt"><input type="button" value="_tweet" ng-click="tweet()"></p>
