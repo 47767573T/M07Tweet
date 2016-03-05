@@ -29,10 +29,9 @@
                 <div class="col-md-offset-1 col-md-6" id="left">
                     <h1>TUIT</h1>
                     <p>
-                        <form ng-model = "setUser()">
-                            <input type="text" ng-model="usuario">
-                            <input type="submit" value="Login">
-                        </form>
+                        <input type="text" ng-model="usuario">
+                        <input type="submit" value="Login" ng-click="setUsuario()">
+
                     </p>
 
                     <p>_user: {{ userId }}</p>

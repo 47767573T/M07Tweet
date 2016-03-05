@@ -13,7 +13,7 @@ app.controller("TweetCtrl", ["$scope", getUsuario, getTweets, getSeguidos
         //Definimos el usuario
         $scope.setUsuario = function(){
             $scope.userId = $scope.usuario;
-            $scope.usuario = "";
+            $scope.usuario = $scope.usuario;
 
             //creamos variable del objeto del usuario segun funcion del factory
             var usuarioDatos = getUsuario($scope.userId);
