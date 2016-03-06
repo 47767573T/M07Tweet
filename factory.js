@@ -14,7 +14,7 @@ app.factory("getUsuario", ["$firebaseObject"
 
             //Tras la peticion devolvemos objeto usuario de firebase y devolvemos nombre y descripcion
             return {nombre: $firebaseObject(usuarioRef.child(usuario).child("name"))
-                ,descripcion: $firebaseObject(usuarioRef.child(usuari).child("description"))};
+                ,descripcion: $firebaseObject(usuarioRef.child(usuario).child("description"))};
 
         };
     }
@@ -44,11 +44,47 @@ app.factory("getSeguidos", ["$firebaseArray", "$firebaseObject"
         return function(usuario) {
 
             //Creamos la peticion de usuarios a firebase
-            var tweetRef = new Firebase("https://ecaibtweet.firebaseio.com/users");
+            var seguidosRef = new Firebase("https://ecaibtweet.firebaseio.com/users");
 
             //Tras la peticion devolvemos un arrayList usuarios que sigue
-            return $firebaseArray(tweetRef.child(usuario).child("following"));
+            return $firebaseArray(seguidosRef.child(usuario).child("following"));
         };
+    }
+]);
+
+app.factory("getTweetSeguidos", ["$firebaseArray", "$firebaseObject", "getTweets", "$firebaseObject"
+    ,function($firebaseArray, $firebaseObject) {
+        return function(usuario) {
+
+            //Creamos la peticion de usuarios a firebase
+
+            var tweetRef = new Firebase("https://ecaibtweet.firebaseio.com/users");
+            var seguidos = $firebaseArray(tweetRef.child(usuario).child("following"));
+
+            var tweets = [];
+
+
+            for(i=0 ; i<seguidos.length ; i++){
+                var seguido = seguidos.childNodes[i].userId;
+                var tweetsSeguido = $firebaseArray(tweetRef.child(seguido).child("tweets"));
+
+                for( j=0 ; j<tweetsSeguido.size() ;  ){
+                    tweets.$add({
+                        nombre: $firebaseObject().
+                        ,texto:
+
+                    });
+                };
+
+            };
+            return tweets;
+        };
+
+        $scope.messages.$add({
+            -                    from: "Firebase Docs",
+            -                    content: "Hello world!"
+        -                });
+
     }
 ]);
 

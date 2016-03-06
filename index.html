@@ -26,31 +26,45 @@
         <div class="container">
             <div class="row">
 
-                <div class="col-md-offset-1 col-md-6" id="left">
-                    <h1>TUIT</h1>
+                <div class="col-md-offset-1 col-md-6" id="general">
+                    <h1>Usuario</h1>
+
+                    <!-- setear usuario -->
                     <p>
                         <input type="text" ng-model="usuario">
                         <input type="submit" value="Login" ng-click="setUsuario()">
                     </p>
 
                     <p>Usuario: {{ userId }}</p>
-                    <p>_name: {{ usuarioNombre.$value }}</p>
-                    <p>_description: {{ usuarioDescripcion.$value }}</p>
-                    <p><input type="text" ng-model="usuari2Follow"><input type="button" value="_follow" ng-click="follow()"></p>
-
-                    <p><input type="text" ng-model="tweetTxt"><input type="button" value="_tweet" ng-click="tweet()"></p>
-
-                    <p>_following: </p>
+                    <p>Nombre: {{ usuarioNombre.$value }}</p>
+                    <p>Descripcion: {{ usuarioDescripcion.$value }}</p>
+                    </br>
+                    <!-- TODO: resolver error de añadir follower repetido -->
+                    <p>
+                        <input type="text" ng-model="usuarioSeguidoNuevo">
+                        <input type="button" value="Seguir" ng-click="addSeguido()"></p>
+                    <p>
+                        <input type="text" ng-model="tweetMsg">
+                        <input type="button" value="Tuitear" ng-click="addTweet()"></p>
+                    <p>Siguiendo: </p>
                     <ul class="chatbox">
-                        <li ng-repeat="follow in followings">{{ follow.idUser }}</li>
+                        <li ng-repeat="seguido in seguidos">{{ seguido.idUser }}</li>
                     </ul>
                 </div>
 
-                <div class="col-md-offset-1 col-md-6" id="right">
-                    <h3>_feed:</h3>
+                <div class="col-md-offset-6 col-sm-6" id="usuarioTweet">
+                    <h2>Tuits:</h2>
 
                     <ul class="chatbox">
-                        <li ng-repeat="tweet in userTweets">{{ userId }}: {{ tweet.text }}</li>
+                        <li ng-repeat="tweet in usuarioTweets">{{ userId }}-> {{ tweet.text }}</li>
+                    </ul>
+                </div>
+
+                <div class="col-md-offset-6 col-sm-6" id="seguidoTweet">
+                    <h2>Tuits:</h2>
+
+                    <ul class="chatbox">
+                        <li ng-repeat="tweet in usuarioTweets">{{ userId }}-> {{ tweet.text }}</li>
                     </ul>
                 </div>
 

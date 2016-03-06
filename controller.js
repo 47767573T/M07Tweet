@@ -3,7 +3,7 @@
  */
 
 
-app.controller("TweetCtrl", ["$scope", "getUsuario", "getTweets", "getSeguidos"
+app.controller("TweetCtrl", ["$scope", "getUsuario", "getTweets", "getSeguidos", "getTweetSeguidos",
     ,function($scope, getUsuario, getTweets, getSeguidos) {
 
         //Inicializamos lo que mostramos
@@ -13,7 +13,6 @@ app.controller("TweetCtrl", ["$scope", "getUsuario", "getTweets", "getSeguidos"
         //Definimos el usuario
         $scope.setUsuario = function(){
             $scope.userId = $scope.usuario;
-            $scope.usuario = "";
 
             //creamos variable del objeto del usuario segun funcion del factory
             var usuarioDatos = getUsuario($scope.userId);
@@ -21,26 +20,36 @@ app.controller("TweetCtrl", ["$scope", "getUsuario", "getTweets", "getSeguidos"
             $scope.usuarioDescripcion = usuarioDatos.descripcion;
             $scope.usuarioTweets = getTweets($scope.userId);
             $scope.seguidos = getSeguidos($scope.userId);
+            $scope.seguidosTweets = [
+            ];
+
             //$scope.followingTweets = getFollowingTweets($scope.userId);
         }
 
         //Metodo para crear nuevo mensajes que añade al array de tweets del usuario
         $scope.addTweet = function() {
-            $scope.usuarioTweets.$add({ text: $scope.tweetTxt });
+            $scope.usuarioTweets.$add({ text: $scope.tweetMsg });
             $scope.tweetTxt = "";
         }
 
         //Añade un seguido al listado de seguidos del firebase
-        $scope.follow = function() {
-            $scope.seguidos.$add({ idUser: $scope.usuari2Follow });
-            $scope.usuarioSeguido = "";
+        $scope.addSeguido = function() {
+            $scope.seguidos = getSeguidos($scope.userId);
+            $scope.seguidos.$add({ idUser: $scope.usuarioSeguidoNuevo });
+            $scope.usuarioSeguidoNuevo = "";
         }
 
-
+        //Añade un seguido al listado de seguidos del firebase
+        $scope.addSeguidoTweet = function() {
+            $scope.seguidos = getSeguidos($scope.userId);
+            $scope.seguidos.$add({ idUser: $scope.usuarioSeguidoNuevo });
+            $scope.usuarioSeguidoNuevo = "";
+        }
 
         $scope.changeUser = function() {
             $scope.user = $scope.userNew;
         }
+
 
 
         //Metodo para crear nuevo mensajes que añade al array de mensajes; llamado ng-submit
