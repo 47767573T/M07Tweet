@@ -53,37 +53,44 @@ app.factory("getSeguidos", ["$firebaseArray", "$firebaseObject"
 ]);
 
 app.factory("getTweetSeguidos", ["$firebaseArray", "$firebaseObject", "getTweets", "$firebaseObject"
-    ,function($firebaseArray, $firebaseObject) {
+    ,function($firebaseArray) {
         return function(usuario) {
 
             //Creamos la peticion de usuarios a firebase
-
             var tweetRef = new Firebase("https://ecaibtweet.firebaseio.com/users");
+
+
             var seguidos = $firebaseArray(tweetRef.child(usuario).child("following"));
 
-            var tweets = [];
+            var tweetsTotal = [];
+
+            //console.log(seguidos);
+            seguidos.$loaded().then(function () {
+                console.log(seguidos)
+                var tweetRef2 = new Firebase("https://ecaibtweet.firebaseio.com/users");
+                for (var i = 0; i < seguidos.length; i++) {
+                    var seguido = seguidos[i].idUser;
 
 
-            for(i=0 ; i<seguidos.length ; i++){
-                var seguido = seguidos.childNodes[i].userId;
-                var tweetsSeguido = $firebaseArray(tweetRef.child(seguido).child("tweets"));
+                    var tweetsSeguido = $firebaseArray(tweetRef2.child(seguido).child("tweets"));
 
-                for( j=0 ; j<tweetsSeguido.size() ;  ){
-                    tweets.$add({
-                        nombre: $firebaseObject().
-                        ,texto:
+                    tweetsSeguido.$loaded().then(function () {
+                        console.log(tweetsSeguido.length);
 
+                        for (var j = 0; j < tweetsSeguido.size(); j++) {
+
+                            tweetsTotal.push({
+                                user: seguido,
+                                text: tweetsSeguido[j]
+                            });
+                            console.log(seguido + " - " + tweetsSeguido[j]);
+                        };
                     });
                 };
+                return tweetsTotal;
 
-            };
-            return tweets;
+            });
         };
-
-        $scope.messages.$add({
-            -                    from: "Firebase Docs",
-            -                    content: "Hello world!"
-        -                });
 
     }
 ]);

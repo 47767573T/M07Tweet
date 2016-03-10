@@ -26,7 +26,7 @@
         <div class="container">
             <div class="row">
 
-                <div class="col-md-offset-1 col-md-6" id="general">
+                <div class="col-md-offset-1 col-md-6" id="left">
                     <h1>Usuario</h1>
 
                     <!-- setear usuario -->
@@ -39,7 +39,6 @@
                     <p>Nombre: {{ usuarioNombre.$value }}</p>
                     <p>Descripcion: {{ usuarioDescripcion.$value }}</p>
                     </br>
-                    <!-- TODO: resolver error de añadir follower repetido -->
                     <p>
                         <input type="text" ng-model="usuarioSeguidoNuevo">
                         <input type="button" value="Seguir" ng-click="addSeguido()"></p>
@@ -52,7 +51,7 @@
                     </ul>
                 </div>
 
-                <div class="col-md-offset-6 col-sm-6" id="usuarioTweet">
+                <div class="col-sm-offset-6 col-sm-6" id="usuarioTweet">
                     <h2>Tuits:</h2>
 
                     <ul class="chatbox">
@@ -64,7 +63,7 @@
                     <h2>Tuits:</h2>
 
                     <ul class="chatbox">
-                        <li ng-repeat="tweet in usuarioTweets">{{ userId }}-> {{ tweet.text }}</li>
+                        <li ng-repeat="tweet in tweetSeguidos">{{ tweet.user }}-> {{ tweet.text }}</li>
                     </ul>
                 </div>
 
