@@ -20,7 +20,8 @@ app.controller("TweetCtrl", ["$scope", "getUsuario", "getTweets", "getSeguidos",
             $scope.usuarioDescripcion = usuarioDatos.descripcion;
             $scope.usuarioTweets = getTweets($scope.userId);
             $scope.seguidos = getSeguidos($scope.userId);
-            $scope.tweetSeguidos = getTweetSeguidos($scope.userId);
+            $scope.tweetSeguidos = [];
+            $scope.getTweetSeguidos();
         }
 
         //Metodo para crear nuevo mensajes que añade al array de tweets del usuario
@@ -36,11 +37,31 @@ app.controller("TweetCtrl", ["$scope", "getUsuario", "getTweets", "getSeguidos",
             $scope.usuarioSeguidoNuevo = "";
         }
 
-        //Añade un seguido al listado de seguidos del firebase
-        $scope.addTweetSeguidos = function() {
-            $scope.tweetSeguidos = getTweetSeguidos($scope.userId);
+        $scope.getTweetSeguidos = function(){
+            $scope.seguidos = getSeguidos($scope.userId);
+            var seg = getSeguidos($scope.userId);
+            var t = [];
+
+            for (var s in seg){
+                var tuits = getTweets(seg[s].idUser);
+
+                console.log("")
+
+                for (var tuit in tuits){
+                    t.push(
+                        userS = s.idUser,
+                        text = tuit.text
+                    );
+                }
+
+
+
+
+            }
+
 
         }
+
 
         /*$scope.changeUser = function() {
             $scope.user = $scope.userNew;

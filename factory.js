@@ -54,13 +54,10 @@ app.factory("getSeguidos", ["$firebaseArray", "$firebaseObject"
 
 app.factory("getTweetSeguidos", ["$firebaseArray", "$firebaseObject", "getTweets", "$firebaseObject"
     ,function($firebaseArray) {
-        return function(usuario) {
+        return function(usuario, seguidos) {
 
             //Creamos la peticion de usuarios a firebase
             var tweetRef = new Firebase("https://ecaibtweet.firebaseio.com/users");
-
-
-            var seguidos = $firebaseArray(tweetRef.child(usuario).child("following"));
 
             var tweetsTotal = [];
 
@@ -70,7 +67,6 @@ app.factory("getTweetSeguidos", ["$firebaseArray", "$firebaseObject", "getTweets
                 var tweetRef2 = new Firebase("https://ecaibtweet.firebaseio.com/users");
                 for (var i = 0; i < seguidos.length; i++) {
                     var seguido = seguidos[i].idUser;
-
 
                     var tweetsSeguido = $firebaseArray(tweetRef2.child(seguido).child("tweets"));
 
